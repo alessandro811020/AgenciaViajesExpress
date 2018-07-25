@@ -12,7 +12,9 @@
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "jquery": "^1.9.1",
-    "popper.js": "^1.14.3"
+    "mysql2": "^1.5.3",
+    "popper.js": "^1.14.3",
+    "sequelize": "^4.38.0"
   },
   "author": "Alejandro Diaz Solis",
   "license": "ISC"

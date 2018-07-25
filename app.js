@@ -20,7 +20,7 @@ app.use('/', indexRouter);
 app.set('port', (process.env.PORT||PORT));
 
 app.listen(app.get('port'),()=>{
-    console.log(`Inicializado el servidor de http://localhost:${app.get('port')}`);
+    console.log(`Inicializado el servidor de http://localhost:${app.get('port')}/home`);
     
 })
 

@@ -114,10 +114,12 @@ header .completar{
 
 /*<!-----------------CONTENIDO (OFERTAS)-------------------->*/
 
-.container {
+section .container {
     padding-top:20px;
     height: 500px;
-	
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .imagen {
@@ -148,7 +150,7 @@ header .completar{
 	text-decoration: none;
 }
 
-p {
+section .container p {
 	padding-top:10px;
 	text-align:center;
 }

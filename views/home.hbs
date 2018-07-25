@@ -1,1 +1,19 @@
-<h1>Pagina desde handlebars</h1>
+<div class="container" align="center">
+    {{#each consulta}}
+    <div class="col-md-4">
+        <a href="#">
+            <div class="col-md-12 imagen" id="{{ciudad}}">
+                <div class="row">
+                    <div class="description col-md-8">
+                        <p>Save {{reserva}}$ pay only</p>
+                    </div>
+                    <div class="price col-md-4">
+                        <p>{{precio}}</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <p>{{ciudad}}</p>
+    </div>
+    {{/each}}
