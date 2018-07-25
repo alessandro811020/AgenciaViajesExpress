@@ -116,7 +116,7 @@ header .completar{
 
 section .container {
     padding-top:20px;
-    height: 500px;
+    height: 600px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
