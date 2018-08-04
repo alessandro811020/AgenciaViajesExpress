@@ -9,6 +9,4 @@ const Oferta = CONN.define('ofertas',{
     paraid: Sequelize.STRING
 });
 
-
-
 module.exports = Oferta;

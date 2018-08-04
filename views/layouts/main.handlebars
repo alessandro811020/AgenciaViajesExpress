@@ -15,19 +15,19 @@
     <header>
         <div class="icono-menu">
             <div class="logo">
-                <a href="index.html">
+                <a href="http://localhost:3000/home">
                     <img src="images/iconoweb.png" alt="Agencia de Viajes GeeksHubs">
                 </a>
             </div>
             <div class="menu">
                 <div>
-                    <a href="">Destinos</a>
+                    <a href="http://localhost:3000/home#destinos">Destinos</a>
                 </div>
                 <div>
                     <a href="">Quienes Somos</a>
                 </div>
                 <div>
-                    <a href="">Dónde Estamos</a>
+                    <a href="http://localhost:3000/ubicacion#destinos">Dónde Estamos</a>
                 </div>
             </div>
             <div class="redes">
@@ -72,7 +72,7 @@
             </div>
             <div class="texto2">Descubre lugares maravillosos!</div>
             <div class="boton">
-                <button type="button" class="btn btn-warning">
+                <button type="button" class="btn btn-warning" onclick='location.href="http://localhost:3000/home#destinos"'>
                     <b>ver destinos</b>
                 </button>
             </div>
@@ -82,12 +82,13 @@
 
 
     </header>
-    <section class="container">
+    <a name="destinos">
+        <section class="container">
 
     {{{body}}}
 
-    </section>
-
+        </section>
+    </a>
     <footer>
         <div class="datos-finales">
             <div class="espacio-inicial"></div>
@@ -125,7 +126,7 @@
                     <a href="">Aviso Legal</a>
                 </div>
                 <div>
-                    <a href="">Contacto</a>
+                    <a href="http://localhost:3000/contacto">Contacto</a>
                 </div>
                 <div>
                     <a href="">Programa de Puntos</a>
