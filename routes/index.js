@@ -5,6 +5,7 @@ const Sequelize = require('sequelize');
 const Travel = require('../models/Travel');
 const Contacto = require("../models/Contacto");
 const CONN = require('../connection/mysqlconn');
+const email = require('../config/emailConf');
 
 router.get('/home', async (req,res,next)=>{
     try{
@@ -69,6 +70,37 @@ router.post('/contactarAgencia', async (req, res, next)=>{
             topico: req.body.topico,
             consulta: req.body.consulta
         }).then(()=>{
+
+            const textoCorreo="Se ha presentado una nueva inquietud. Datos del solicitante\nNombre:"+req.body.nombre+"\nEmail:"+req.body.email+"\nTopico:"+req.body.topico+"\nConsulta:"+req.body.consulta;
+            const cartaConsulta1={
+                to: 'enquirygeekshubstravels@gmail.com',
+                subject: req.body.topico,
+                html: textoCorreo,
+            }
+            const cartaConsulta2={
+                to: req.body.email,
+                subject: "Confirmación de recepción de la consulta "+req.body.topico,
+                html: "Usted ha realizado a la agencia textoCorreo la consulta: "+textoCorreo
+            }
+            email.transporter.sendMail(cartaConsulta1,(error, info)=>{
+                if(error) {
+                    res.status(500).send(error,cartaConsulta1);
+                    return ;
+                }else{
+                    res.status(200).send('Respuesta "%s"'+info.response);
+                }
+            })
+
+            email.transporter.sendMail(cartaConsulta2,(error, info)=>{
+                if(error) {
+                    res.status(500).send(error,cartaConsulta2);
+                    return ;
+                }else{
+                    email.transporter.close();
+                    res.status(200).send('Respuesta "%s"'+info.response);
+                }
+            })
+
             res.render('contactarAgencia',{
                 title:"Agencia de Viajes de GEEKSHUBS -- Recibido",
                 mensaje:'Estimado '+req.body.nombre+' su inquietud ha sido enviado satisfactoriamente, pronto nos pondremos en contacto con usted. Muchas gracias'
