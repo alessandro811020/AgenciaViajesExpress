@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const parser = require('body-parser');
 const Sequelize = require('sequelize');
 const Travel = require('../models/Travel');
 const Contacto = require("../models/Contacto");
@@ -16,6 +15,20 @@ router.get('/home', async (req,res,next)=>{
         });
     }catch(err){
         console.log('Ha habido un error');
+        res.render('error',{
+            title:"Agencia de Viajes de GEEKSHUBS",
+            status:404
+        });
+    }
+})
+
+router.get('/quienes', async (req, res, next)=>{
+    try{
+        res.render('somos', {
+            title: "Agencia de Viajes de GEEKSHUBS -- Quienes Somos"
+        });
+    }catch(err){
+        console.log('Ha habido un error', err);
         res.render('error',{
             title:"Agencia de Viajes de GEEKSHUBS",
             status:404
