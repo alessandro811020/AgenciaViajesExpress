@@ -1,0 +1,58 @@
+<div class="contacto">
+    <h3 class="titulo">{{titulo_formulario}}</h3>
+    <form action="/reservarOferta" method="POST">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="nombreCliente">Nombre</label>
+                <input type="text" class="form-control" id="inputNombre" placeholder="Nombre" {{requerido}} name='nombre'>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="apellidosCliente">Apellidos</label>
+                <input type="text" class="form-control" id="inputApellidos" placeholder="Apellidos" {{requerido}} name='apellidos'>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="identificacionCliente">Identificación(DNI, Pasaporte, NIE)</label>
+                <input type="text" class="form-control" id="inputIdentificacion" placeholder="Identificacion" {{requerido}} name='identificacion'>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="telefonoCliente">Teléfono</label>
+                <input type="number" class="form-control" id="inputTelefono" placeholder="Teléfono" {{requerido}} name='telefono'>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="inputEmail">Email</label>
+                <input type="email" class="form-control" id="inputEmail" placeholder="Email" {{requerido}} name='email'>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputCiudad">Ciudad</label>
+                <input type="text" class="form-control" id="inputCiudad" value={{ciudad}} {{caracteristica}} name='ciudad'>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputPrecio">Precio</label>
+                <input type="number" class="form-control" id="inputPrecio" value={{precio}} {{caracteristica}} name='precio'>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputReserva">Reserva</label>
+                <input type="number" class="form-control" id="inputReserva" value={{reserva}} {{caracteristica}} name='reserva'>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTarjeta">Tarjeta Bancaria</label>
+            <input type="number" class="form-control" id="inputTarjeta" placeholder="Tarjeta Crédito" {{requerido}} name='tarjeta'>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="inputFechaCaducidad">Fecha Caducidad</label>
+                <input type="text" class="form-control" id="inputFecha" placeholder="mm/yyyy" {{requerido}} name='fechaCaducidad'>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputCVS">Ciudad</label>
+                <input type="text" class="form-control" id="inputCVS" placeholder="CVS" {{requerido}} name='cvs'>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Reservar</button>
+    </form>
+</div>

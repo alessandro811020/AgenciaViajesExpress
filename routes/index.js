@@ -36,7 +36,6 @@ router.get('/quienes', async (req, res, next)=>{
     }
 })
 
-
 router.get('/ubicacion', async (req,res,next)=>{
     const pantalla= 'allowfullscreen';
     try{       
@@ -64,6 +63,33 @@ router.get('/contacto', async (req,res,next)=>{
         res.render('contacto',{
             title:"Agencia de Viajes de GEEKSHUBS -- Contacto",
             titulo_formulario:'Formulario de Contacto'
+        });
+    }catch(err){
+        console.log('Ha habido un error');
+        res.render('error',{
+            title:"Agencia de Viajes de GEEKSHUBS",
+            status:404
+        });
+    }
+});
+
+router.get('/viaje/:lugar', async (req,res,next)=>{
+    try{       
+        const oferta = await Travel.findAll({
+            where:{
+                paraid: req.params.lugar
+            }
+        })
+        console.log(oferta[0].ciudad);
+        
+        res.render('reserva',{
+            title:"Agencia de Viajes de GEEKSHUBS -- Reservar en "+req.params.lugar,
+            ciudad: oferta[0].ciudad,
+            precio: oferta[0].precio,
+            reserva: oferta[0].reserva,
+            caracteristica: 'readonly',
+            requerido: 'required',
+            titulo_formulario:'Formulario de Reserva'
         });
     }catch(err){
         console.log('Ha habido un error');
@@ -127,6 +153,54 @@ router.post('/contactarAgencia', async (req, res, next)=>{
             status:404
         });
     }
+})
+
+router.post('/reservarOferta', async (req, res, next)=>{
+    try{   
+        Contacto.create({
+            nombre: req.body.nombre,
+            apellidos: req.body.apellidos,
+            identificacion: req.body.identificacion,
+            telefono: req.body.telefono,
+            email: req.body.email,
+            ciudad: req.body.ciudad,
+            precio: req.body.precio,
+            reserva: req.body.reserva,
+            tarjeta: req.body.tarjeta,
+            fechaCaducidad: req.body.fechaCaducidad,
+            codigoCVS: req.body.cvs
+        }).then(()=>{
+
+            const textoCorreo="Se ha realizado su reserva con éxito. Datos de la reserva:\nNombre y Apellidos:"+req.body.nombre+" "+req.body.apellidos+
+            "\nIdentificacion: "+req.body.identificacion+"\nTelefono: "+req.body.telefono+"\nEmail:"+req.body.email+
+            "\nCiudad Reservada: "+req.body.ciudad+"\nPrecio: "+req.body.precio;
+            const cartaReserva={
+                to: req.body.email,
+                subject: 'Reserva realizada con GEEKSHUBS',
+                html: textoCorreo,
+            }
+            email.transporter.sendMail(cartaReserva,(error, info)=>{
+                if(error) {
+                    res.status(500).send(error,cartaReserva);
+                    return ;
+                }else{
+                    res.status(200).send('Respuesta "%s"'+info.response);
+                }
+            })
+            res.render('contactarAgencia',{
+                title:"Agencia de Viajes de GEEKSHUBS -- Recibido",
+                mensaje:'Estimado '+req.body.nombre+' su reserva ha sido realizada satisfactoriamente, recibirá un email con todos los datos de su reservación. Muchas gracias'
+            });    
+        })
+        
+    }catch(err){
+        console.log('Ha habido un error');
+        res.render('error',{
+            title:"Agencia de Viajes de GEEKSHUBS",
+            status:404
+        });
+    }
+
 })
 
 
