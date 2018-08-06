@@ -13,7 +13,7 @@ router.get('/home', async (req,res,next)=>{
         const ofertas = await Travel.findAll();        
         res.render('home',{
             title:"Agencia de Viajes de GEEKSHUBS",
-            consulta: ofertas
+            consulta: ofertas,
         });
     }catch(err){
         console.log('Ha habido un error');
