@@ -5,6 +5,8 @@ const CONN = require('../connection/mysqlconn');
 const Reserva = CONN.define('reservas',{
     nombre: Sequelize.STRING,
     apellidos: Sequelize.STRING,
+    usuario: Sequelize.STRING,
+    password: Sequelize.STRING,
     identificacion: Sequelize.STRING,
     telefono: Sequelize.INTEGER,
     email: Sequelize.STRING,
@@ -22,6 +24,8 @@ const Reserva = CONN.define('reservas',{
 //         return Reserva.create({
 //             nombre: "nombre",
 //             apellidos:'fndsflsdfn',
+//             usuario:"fsddfsd",
+//             password: "1234",
 //             identificacion:'423222',
 //             telefono: 23233423,
 //             email:"sfs@sdfsd2",

@@ -3,8 +3,10 @@ const router = express.Router();
 const Sequelize = require('sequelize');
 const Travel = require('../models/Travel');
 const Contacto = require("../models/Contacto");
+const Reserva = require("../models/Reserva");
 const CONN = require('../connection/mysqlconn');
 const email = require('../config/emailConf');
+const bcrypt = require('bcrypt');
 
 router.get('/home', async (req,res,next)=>{
     try{
@@ -156,10 +158,16 @@ router.post('/contactarAgencia', async (req, res, next)=>{
 })
 
 router.post('/reservarOferta', async (req, res, next)=>{
+    const saltRounds= 10;
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(req.body.password, salt);
+    
     try{   
-        Contacto.create({
+        Reserva.create({
             nombre: req.body.nombre,
             apellidos: req.body.apellidos,
+            usuario: req.body.usuario,
+            password: hash,
             identificacion: req.body.identificacion,
             telefono: req.body.telefono,
             email: req.body.email,
@@ -191,6 +199,9 @@ router.post('/reservarOferta', async (req, res, next)=>{
                 title:"Agencia de Viajes de GEEKSHUBS -- Recibido",
                 mensaje:'Estimado '+req.body.nombre+' su reserva ha sido realizada satisfactoriamente, recibirá un email con todos los datos de su reservación. Muchas gracias'
             });    
+            //Sirve para comparar la contraseña
+            //console.log(bcrypt.compareSync('abc123', hash));
+            
         })
         
     }catch(err){

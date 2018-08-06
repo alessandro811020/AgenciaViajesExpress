@@ -12,6 +12,16 @@
             </div>
         </div>
         <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="usuarioCliente">Usuario</label>
+                <input type="text" class="form-control" id="inputUsuario" placeholder="Usuario" {{requerido}} name='usuario'>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="passwordCliente">Contraseña</label>
+                <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña" {{requerido}} name='password'>
+            </div>
+        </div>
+        <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="identificacionCliente">Identificación(DNI, Pasaporte, NIE)</label>
                 <input type="text" class="form-control" id="inputIdentificacion" placeholder="Identificacion" {{requerido}} name='identificacion'>
