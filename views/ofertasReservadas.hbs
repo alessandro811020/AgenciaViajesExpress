@@ -1,0 +1,53 @@
+<div class="contacto">
+    <h3 class="titulo">{{titulo_formulario}}</h3>
+    <form action="/reservarOferta" method="POST">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="nombreCliente">Nombre:</label>
+                <input type="text" class="form-control" id="inputNombre" name='nombre' value={{nombre}}>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="apellidosCliente">Apellidos:</label>
+                <input type="text" class="form-control" id="inputApellidos" name='apellidos' value={{apellidos}}>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="usuarioCliente">Usuario</label>
+                <input type="text" class="form-control" id="inputUsuario" name='usuario' value={{usuario}}>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="identificacionCliente">Identificación(DNI, Pasaporte, NIE)</label>
+                <input type="text" class="form-control" id="inputIdentificacion" name='identificacion' value={{identificacion}}>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="telefonoCliente">Teléfono</label>
+                <input type="number" class="form-control" id="inputTelefono" name='telefono' value={{telefono}}>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="inputEmail">Email</label>
+                <input type="email" class="form-control" id="inputEmail" name='email' value={{email}}>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputCiudad">Ciudad</label>
+                <input type="text" class="form-control" id="inputCiudad" value={{ciudad}} {{caracteristica}} name='ciudad'>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputPrecio">Precio</label>
+                <input type="number" class="form-control" id="inputPrecio" value={{precio}} {{caracteristica}} name='precio'>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputReserva">Reserva</label>
+                <input type="number" class="form-control" id="inputReserva" value={{reserva}} {{caracteristica}} name='reserva'>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Volver</button>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+
+    </form>
+</div>
