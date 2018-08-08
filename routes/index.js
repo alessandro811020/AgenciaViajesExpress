@@ -8,12 +8,16 @@ const CONN = require('../connection/mysqlconn');
 const email = require('../config/emailConf');
 const bcrypt = require('bcrypt');
 
+
 router.get('/home', async (req,res,next)=>{
+    let noEncontrado =false
+    req.session.destroy()
     try{
         const ofertas = await Travel.findAll();        
         res.render('home',{
             title:"Agencia de Viajes de GEEKSHUBS",
             consulta: ofertas,
+            noEncontrado: noEncontrado
         });
     }catch(err){
         console.log('Ha habido un error');
@@ -35,15 +39,20 @@ router.post('/accesoReservas', async (req,res,next)=>{
         const chequeoPassword = bcrypt.compareSync(req.body.passwordEntrar, usuarioBuscado[0].password);
 
         if (chequeoPassword) {
+            
+            req.session.usuario=usuarioBuscado[0].usuario;
+            req.session.nombre= usuarioBuscado[0].nombre;
+            req.session.apellidos = usuarioBuscado[0].apellidos;
+            req.session.email = usuarioBuscado[0].email;
+
             res.render('ofertasReservadas', {
                 title: "Agencia de Viajes de GEEKSHUBS -- Reservas de "+usuarioBuscado[0].nombre,
                 titulo_formulario: "Reservas realizadas por "+usuarioBuscado[0].nombre +" "+usuarioBuscado[0].apellidos,
-                id: usuarioBuscado[0].id,
-                nombre: usuarioBuscado[0].nombre,
-                apellidos: usuarioBuscado[0].apellidos,
+                nombre: req.session.nombre,
+                apellidos: req.session.apellidos,
                 identificacion: usuarioBuscado[0].identificacion,
-                email: usuarioBuscado[0].email,
-                usuario: usuarioBuscado[0].usuario,
+                email: req.session.email,
+                usuario: req.session.usuario,
                 telefono: usuarioBuscado[0].telefono,
                 ciudad: usuarioBuscado[0].ciudad,
                 precio: usuarioBuscado[0].precio,
@@ -51,11 +60,13 @@ router.post('/accesoReservas', async (req,res,next)=>{
                 reserva: usuarioBuscado[0].reserva
             });
         } else {
+            console.log('no logueo bien');
+            noEncontrado= true;
             const ofertas = await Travel.findAll();        
             res.render('home',{
                 title:"Agencia de Viajes de GEEKSHUBS",
                 consulta: ofertas,
-                encontrado:false//hay que preparar para que salga el cartel referente a error de login
+                noEncontrado:true//hay que preparar para que salga el cartel referente a error de login
             });
         }
     }catch(err){

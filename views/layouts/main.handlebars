@@ -39,6 +39,13 @@
                 <div>
                     <input class="btn btn-success" type="submit" value="Mis Reservas" onclick="mostrar_ocultar()" />
                 </div>
+                {{#if noEncontrado}}
+                <div>
+                    <h4>
+                        <strong>Usuario o contraseña incorrecta</strong>
+                    </h4>
+                </div>
+                {{/if}}
             </div>
             <div class="menu">
                 <div>
@@ -101,6 +108,7 @@
             </div>
         </div>
         <div class="completar">
+
             <form action="/accesoReservas" method="POST" id="login" style='display:none' class="formularioLogin">
                 <div class="alert alert-dark">
                     <h5>Ingrese su Usuario y Contraseña</h5>
